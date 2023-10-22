@@ -31,7 +31,9 @@ export class CrudDocenteComponent implements OnInit {
   dataSource:any;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  displayedColumns = ["idDocente","nombre","dni","fecha","hora","ubigeo","estado",'actions'];
+ // displayedColumns = ["idDocente","nombre","dni","fecha","hora","ubigeo","estado",'actions'];
+
+ displayedColumns = ["idDocente","nombre","dni","fecha","hora"];
 
   constructor(private formBuilder: FormBuilder,  
               private dialogService: MatDialog,

@@ -18,9 +18,34 @@
         </div>
 
         <div class="row" style="margin-top: 3%">
+            <mat-table #table class="mat-cell" [dataSource]="dataSource">
+                    <ng-container matColumnDef="idDocente">
+                        <mat-header-cell math-header-cell *matHeaderCellDef>Código</mat-header-cell>
+                        <mat-cell *matCellDef="let aux"> {{aux.idDocente}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="nombre">
+                        <mat-header-cell math-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+                        <mat-cell *matCellDef="let aux"> {{aux.nombre}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="dni">
+                        <mat-header-cell math-header-cell *matHeaderCellDef>DNI</mat-header-cell>
+                        <mat-cell *matCellDef="let aux"> {{aux.dni}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="fecha">
+                        <mat-header-cell math-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
+                        <mat-cell *matCellDef="let aux"> {{aux.fechaRegistro | date: "dd:MM:yyy"}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="hora">
+                        <mat-header-cell math-header-cell *matHeaderCellDef>Hora</mat-header-cell>
+                        <mat-cell *matCellDef="let aux"> {{aux.fechaRegistro | date: "HH:mm:ss a"}}</mat-cell>
+                    </ng-container>
 
+                    <mat-header-row *matHeaderCellDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let aux; columns: displayedColumns"></mat-row>
+            </mat-table>
 
-    </div>
+            <mat-paginator [pageSizeOptions]="[6,8,10]" showFirstLastButtons=""></mat-paginator>
+        </div>
 
 
     </div>
