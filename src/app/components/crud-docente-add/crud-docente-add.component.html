@@ -8,19 +8,22 @@
       <div  class="row"  style="margin-top: 3%">
                 <mat-form-field class="col-md-8">
                     <mat-label>Nombre</mat-label>
-                    <input matInput  name="nombre" >
+                    <input matInput  name="nombre" [(ngModel)]="docente.nombre" >
                 </mat-form-field>
                 <mat-form-field class="col-md-4">
                     <mat-label>DNI</mat-label>
-                    <input  matInput name="dni" >
+                    <input  matInput name="dni" [(ngModel)]="docente.dni">
                 </mat-form-field>
         </div>
         <div class="row" style="margin-top: 5%">
     
             <mat-form-field class="col-md-4">
-                <mat-label>Departamento</mat-label>
-                <mat-select  name="departamento" >
+                <mat-label>Departamento </mat-label>
+                <mat-select  name="departamento" (selectionChange)="cargaProvincia()" [(ngModel)]="docente.ubigeo!.departamento" >
                     <mat-option value="-1"> [Seleccione] </mat-option>
+                    <mat-option *ngFor="let aux of departamentos" value="{{ aux }}">
+                        {{aux}}
+                    </mat-option>
                 </mat-select>
             </mat-form-field> 
 
@@ -29,6 +32,9 @@
                 <mat-label>Provincia</mat-label>
                 <mat-select name="provincia"  >
                     <mat-option value="-1"> [Seleccione] </mat-option>
+                    <mat-option *ngFor="let aux of provincias" value="{{ aux }}">
+                        {{ aux }}
+                    </mat-option>
                 </mat-select>
             </mat-form-field> 
 
