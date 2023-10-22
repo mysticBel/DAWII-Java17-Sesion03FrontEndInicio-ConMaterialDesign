@@ -1,10 +1,59 @@
 <div class="container">
-
-    <div class="row">
-        <mat-toolbar color="primary" >    
-        <span>Registrta Docente</span>    
-        </mat-toolbar>  
-    </div>
+    <form  class="mat-dialog-content"  id="idFormModalidad" >
+      <div class="row">
+            <mat-toolbar color="primary" >    
+              <span>Registra Docente</span>    
+            </mat-toolbar>  
+      </div>
+      <div  class="row"  style="margin-top: 3%">
+                <mat-form-field class="col-md-8">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput  name="nombre" >
+                </mat-form-field>
+                <mat-form-field class="col-md-4">
+                    <mat-label>DNI</mat-label>
+                    <input  matInput name="dni" >
+                </mat-form-field>
+        </div>
+        <div class="row" style="margin-top: 5%">
     
+            <mat-form-field class="col-md-4">
+                <mat-label>Departamento</mat-label>
+                <mat-select  name="departamento" >
+                    <mat-option value="-1"> [Seleccione] </mat-option>
+                </mat-select>
+            </mat-form-field> 
 
-</div>
+
+            <mat-form-field class="col-md-4">
+                <mat-label>Provincia</mat-label>
+                <mat-select name="provincia"  >
+                    <mat-option value="-1"> [Seleccione] </mat-option>
+                </mat-select>
+            </mat-form-field> 
+
+            <mat-form-field class="col-md-4">
+                <mat-label>Distrito</mat-label>
+                <mat-select  name="distrito" >
+                    <mat-option value="-1"> [Seleccione] </mat-option>
+                </mat-select>
+
+            </mat-form-field> 
+
+        </div>
+
+        <div  mat-dialog-actions>
+                <button mat-raised-button 
+                        type="submit" 
+                        color="primary" 
+                      >
+                        Registra
+                </button>
+                <button mat-button 
+                        color="primary">
+                        Salir
+                </button>
+        </div>
+
+      </form>
+  </div>
