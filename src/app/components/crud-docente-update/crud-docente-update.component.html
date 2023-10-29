@@ -1,1 +1,75 @@
 
+<div class="container">
+    <form  class="mat-dialog-content"  id="idFormModalidad"  >
+      <div class="row">
+            <mat-toolbar color="primary" >    
+              <span>Actualiza Docente</span>    
+            </mat-toolbar>  
+      </div>
+      <div  class="row"  style="margin-top: 3%">
+                <mat-form-field class="col-md-8">
+                    <mat-label>Nombre</mat-label>
+                    <input  matInput  [(ngModel)]="docente.nombre"  name="nombre" >
+                   
+                </mat-form-field>
+                <mat-form-field class="col-md-4">
+                    <mat-label>DNI</mat-label>
+                    <input  matInput  [(ngModel)]="docente.dni"   name="dni" >
+                    
+                </mat-form-field>
+        </div>
+        <div class="row" style="margin-top: 5%">
+    
+            <mat-form-field class="col-md-4">
+                <mat-label>Departamento</mat-label>
+                <mat-select  name="departamento"  [(ngModel)]="docente.ubigeo!.departamento"  (selectionChange)="cargaProvincia()">
+                    <mat-option value="-1"> [Seleccione] </mat-option>
+                    <mat-option *ngFor="let x of departamentos"  [value]="x">
+                                    {{x}}
+                    </mat-option> 
+                </mat-select>
+                  
+            </mat-form-field> 
+
+
+            <mat-form-field class="col-md-4">
+                <mat-label>Provincia</mat-label>
+                <mat-select   name="provincia"  [(ngModel)]="docente.ubigeo!.provincia" (selectionChange)="cargaDistrito()">
+                    <mat-option value="-1"> [Seleccione] </mat-option>
+                    <mat-option *ngFor="let x of provincias"  [value]="x">
+                        {{x}}
+                    </mat-option> 
+                </mat-select>
+                 
+            </mat-form-field> 
+
+            <mat-form-field class="col-md-4">
+                <mat-label>Distrito</mat-label>
+                <mat-select  name="distrito"  [(ngModel)]="docente.ubigeo!.idUbigeo" >
+                    <mat-option value="-1"> [Seleccione] </mat-option>
+                    <mat-option *ngFor="let x of distritos"  [value]="x.idUbigeo" >
+                        {{x.distrito}}
+                    </mat-option> 
+                </mat-select>
+             
+            </mat-form-field> 
+
+        </div>
+
+        <div  mat-dialog-actions>
+                <button mat-raised-button 
+                        type="submit" 
+                        (click) = "actualiza()"
+                        color="primary" 
+                        [mat-dialog-close]="1">
+                        Actualiza
+                </button>
+                <button mat-button 
+                        color="primary"
+                        (click)="onNoClick()">
+                        Salir
+                </button>
+        </div>
+
+      </form>
+  </div>
