@@ -36,12 +36,20 @@ export class CrudDocenteAddComponent {
   };
 
   // Creamos el constructor para Inicializar el UbigeoService
-  constructor(private ubigeoService: UbigeoService){
+  constructor(public dialogRef: MatDialogRef<CrudDocenteAddComponent>,
+              private ubigeoService: UbigeoService,
+              private docenteService:DocenteService, 
+              private formBuilder: FormBuilder,
+              ){
     this.ubigeoService.listarDepartamento().subscribe(
             x => this.departamentos = x
     )
   };
 
+  //Para cerrar el dialog
+  onNoClick(): void {
+    this.dialogRef.close();
+}
 
   cargaProvincia(){
 
@@ -59,4 +67,41 @@ export class CrudDocenteAddComponent {
     );
     this.docente.ubigeo!.idUbigeo = -1;
 }
+
+//
+registra(){
+  console.log(">>> registra  >> ");
+  console.log(">>> idDocente >> " + this.docente.idDocente);
+  console.log(">>> nombre >>  " + this.docente.nombre);
+  console.log(">>> dni >>  " + this.docente.dni);
+  console.log(">>> estado >>  " + this.docente.estado);
+  console.log(">>> idUbigeo >>  " + this.docente.ubigeo?.idUbigeo);
+  console.log(">>> departamento >>  " + this.docente.ubigeo?.departamento);
+  console.log(">>> provincia >>  " + this.docente.ubigeo?.provincia);
+  console.log(">>> distrito >>  " + this.docente.ubigeo?.distrito);
+
+      
+            // pasamos todo el objeto docente 
+            this.docenteService.inserta(this.docente).subscribe(
+                  x => { 
+                            // una vez que inserto, muestro el mensaje
+                            Swal.fire('Mensaje', x.mensaje, 'info'); 
+                            // luego borramos todo el  json, es decir, inicializamos las variables
+                            this.docente = { 
+                              idDocente:0,
+                              nombre:"",
+                              dni:"",
+                              estado:1,
+                              ubigeo:{
+                                idUbigeo: -1,
+                                departamento:"-1",
+                                provincia:"-1",
+                                distrito:"-1",
+                              }
+                            };
+                        }   
+            );
+      
+}
+
 }

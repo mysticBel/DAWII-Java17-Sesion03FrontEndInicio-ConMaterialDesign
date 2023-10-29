@@ -54,10 +54,13 @@
         <div  mat-dialog-actions>
                 <button mat-raised-button 
                         type="submit" 
-                        color="primary" >
+                        (click)="registra()"
+                        color="primary"
+                        [mat-dialog-close]="1" >
                         Registra
                 </button>
                 <button mat-button 
+                        (click)="onNoClick()"
                         color="primary">
                         Salir
                 </button>
