@@ -30,8 +30,8 @@
 
             <mat-form-field class="col-md-4">
                 <mat-label>Provincia</mat-label>
-                <mat-select name="provincia"  >
-                    <mat-option value="-1"> [Seleccione] </mat-option>
+                <mat-select name="provincia"  (selectionChange)="cargaDistrito()" [(ngModel)] ="docente.ubigeo!.provincia"  >
+                    <mat-option value="-1"> [Seleccione]  </mat-option>
                     <mat-option *ngFor="let aux of provincias" value="{{ aux }}">
                         {{ aux }}
                     </mat-option>
@@ -40,8 +40,11 @@
 
             <mat-form-field class="col-md-4">
                 <mat-label>Distrito</mat-label>
-                <mat-select  name="distrito" >
+                <mat-select  name="distrito" [(ngModel)] ="docente.ubigeo!.idUbigeo" >
                     <mat-option value="-1"> [Seleccione] </mat-option>
+                    <mat-option *ngFor="let aux of distritos" value="{{ aux.idUbigeo }}">
+                        {{ aux.distrito }}
+                    </mat-option>
                 </mat-select>
 
             </mat-form-field> 
@@ -51,8 +54,7 @@
         <div  mat-dialog-actions>
                 <button mat-raised-button 
                         type="submit" 
-                        color="primary" 
-                      >
+                        color="primary" >
                         Registra
                 </button>
                 <button mat-button 

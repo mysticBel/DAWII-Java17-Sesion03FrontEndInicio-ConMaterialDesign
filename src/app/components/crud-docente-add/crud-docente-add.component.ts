@@ -17,9 +17,11 @@ export class CrudDocenteAddComponent {
    // Para Ubigeo
     departamentos : string[] = [];
     provincias : string[] = [];
-    distritos : string[] = [];
+    distritos : Ubigeo[] = [];
 
   // JSON para registrar
+  // todos los valores del formulario van a llegar aqui
+  // y se relacionan en el html con la propiedad Ng Model :)
   docente : Docente ={
       idDocente :0,
       nombre : "",
@@ -33,18 +35,28 @@ export class CrudDocenteAddComponent {
       },
   };
 
-  // Inicializamos el UbigeoService
+  // Creamos el constructor para Inicializar el UbigeoService
   constructor(private ubigeoService: UbigeoService){
     this.ubigeoService.listarDepartamento().subscribe(
             x => this.departamentos = x
     )
   };
 
+
   cargaProvincia(){
 
     this.ubigeoService.listaProvincias(this.docente.ubigeo?.departamento).subscribe(
-            x => this.provincias = x
+      response =>  this.provincias= response
     )
-    
+    this.distritos = [];
+    this.docente.ubigeo!.idUbigeo = -1;
+    this.docente.ubigeo!.provincia = "-1";
   }
+
+  cargaDistrito(){
+    this.ubigeoService.listaDistritos(this.docente.ubigeo?.departamento, this.docente.ubigeo?.provincia).subscribe(
+      response =>  this.distritos = response
+    );
+    this.docente.ubigeo!.idUbigeo = -1;
+}
 }
