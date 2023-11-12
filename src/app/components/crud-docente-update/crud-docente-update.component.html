@@ -1,57 +1,109 @@
 
 <div class="container">
-    <form  class="mat-dialog-content"  id="idFormModalidad"  >
+    <form  class="mat-dialog-content"  id="idFormModalidad" [formGroup]="formsActualiza"  >
       <div class="row">
             <mat-toolbar color="primary" >    
               <span>Actualiza Docente</span>    
             </mat-toolbar>  
       </div>
       <div  class="row"  style="margin-top: 3%">
-                <mat-form-field class="col-md-8">
+                <mat-form-field class="col-md-6">
                     <mat-label>Nombre</mat-label>
-                    <input  matInput  [(ngModel)]="docente.nombre"  name="nombre" >
-                   
+                    <input  matInput  [(ngModel)]="docente.nombre"  name="nombre" formControlName="validaNombre">
+                    <!---->
+                    <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaNombre.touched">
+                        <span *ngIf="formsActualiza.controls.validaNombre.hasError('required')">
+                        El Nombre es requerido
+                        </span>
+                        <span *ngIf="formsActualiza.controls.validaNombre.hasError('pattern')">
+                        El Nombre es 3 a 30 caracteres
+                        </span>
+                    </mat-hint>
+                    <!---->
                 </mat-form-field>
-                <mat-form-field class="col-md-4">
+                <mat-form-field class="col-md-3">
                     <mat-label>DNI</mat-label>
-                    <input  matInput  [(ngModel)]="docente.dni"   name="dni" >
-                    
+                    <input  matInput  [(ngModel)]="docente.dni"   name="dni" formControlName="validaDni" >
+                    <!---->
+                    <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaDni.touched">
+                        <span *ngIf="formsActualiza.controls.validaDni.hasError('required')">
+                            El DNI es requerido
+                        </span>
+                        <span *ngIf="formsActualiza.controls.validaDni.hasError('pattern')">
+                            El DNI tiene 8 dígitos
+                        </span> 
+                    </mat-hint>
+                    <!---->
                 </mat-form-field>
+
+                <mat-form-field class="col-md-3">
+                    <mat-label>Estado</mat-label>
+                    <mat-select  [(ngModel)]="docente.estado" formControlName="validaEstado" name="estado">
+                        <mat-option value="-1"> [Seleccione] </mat-option>
+                        <mat-option value="1"> Activo </mat-option>
+                        <mat-option value="0"> Inactivo </mat-option>
+                    </mat-select>
+                    <!---->
+                    <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaEstado.touched" >
+                        <span *ngIf="formsActualiza.controls.validaEstado.hasError('min')">
+                            El estado es requerido
+                        </span>
+                    </mat-hint>  
+                    <!---->
+                </mat-form-field> 
         </div>
         <div class="row" style="margin-top: 5%">
     
             <mat-form-field class="col-md-4">
                 <mat-label>Departamento</mat-label>
-                <mat-select  name="departamento"  [(ngModel)]="docente.ubigeo!.departamento"  (selectionChange)="cargaProvincia()">
+                <mat-select  name="departamento"  formControlName="validaDepartamento" [(ngModel)]="docente.ubigeo!.departamento"  (selectionChange)="cargaProvincia()">
                     <mat-option value="-1"> [Seleccione] </mat-option>
                     <mat-option *ngFor="let x of departamentos"  [value]="x">
                                     {{x}}
                     </mat-option> 
                 </mat-select>
-                  
+                    <!---->
+                    <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaDepartamento.touched" >
+                        <span *ngIf="formsActualiza.controls.validaDepartamento.hasError('min')">
+                            El departamento es requerido
+                        </span>
+                    </mat-hint> 
+                    <!---->
             </mat-form-field> 
 
 
             <mat-form-field class="col-md-4">
                 <mat-label>Provincia</mat-label>
-                <mat-select   name="provincia"  [(ngModel)]="docente.ubigeo!.provincia" (selectionChange)="cargaDistrito()">
+                <mat-select   name="provincia"  formControlName="validaProvincia"  [(ngModel)]="docente.ubigeo!.provincia" (selectionChange)="cargaDistrito()">
                     <mat-option value="-1"> [Seleccione] </mat-option>
                     <mat-option *ngFor="let x of provincias"  [value]="x">
                         {{x}}
                     </mat-option> 
                 </mat-select>
-                 
+                    <!---->
+                    <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaProvincia.touched">
+                        <span *ngIf="formsActualiza.controls.validaProvincia.hasError('min')">
+                            La provincia es requerida
+                        </span>
+                    </mat-hint> 
+                    <!---->
             </mat-form-field> 
 
             <mat-form-field class="col-md-4">
                 <mat-label>Distrito</mat-label>
-                <mat-select  name="distrito"  [(ngModel)]="docente.ubigeo!.idUbigeo" >
+                <mat-select  name="distrito"  formControlName="validaDistrito" [(ngModel)]="docente.ubigeo!.idUbigeo" >
                     <mat-option value="-1"> [Seleccione] </mat-option>
                     <mat-option *ngFor="let x of distritos"  [value]="x.idUbigeo" >
                         {{x.distrito}}
                     </mat-option> 
                 </mat-select>
-             
+                    <!---->
+                    <mat-hint style="color:red" *ngIf="formsActualiza.controls.validaDistrito.touched">
+                        <span *ngIf="formsActualiza.controls.validaDistrito.hasError('min')">
+                            El distrito es requerido
+                        </span>
+                    </mat-hint>  
+                    <!---->
             </mat-form-field> 
 
         </div>
@@ -61,6 +113,7 @@
                         type="submit" 
                         (click) = "actualiza()"
                         color="primary" 
+                        [disabled]="formsActualiza.invalid"
                         [mat-dialog-close]="1">
                         Actualiza
                 </button>

@@ -37,7 +37,7 @@ export class CrudDocenteAddComponent {
 
   // Para la validacion del registro
   formsRegistra = this.formBuilder.group({
-        validaNombre: ['', [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-ÚñÑ]{3,30}')]],
+        validaNombre: ['', [Validators.required, Validators.pattern('[a-zA-Zá-úÁ-ÚñÑ ]{3,30}')]],
         validaDni: ['', [Validators.required,Validators.pattern('[0-9]{8}')]],
         validaDepartamento: ['', [Validators.min(1)]],
         validaProvincia: ['', [Validators.min(1)]],

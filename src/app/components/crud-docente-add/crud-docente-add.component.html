@@ -8,7 +8,7 @@
       <div  class="row"  style="margin-top: 3%">
                 <mat-form-field class="col-md-8">
                     <mat-label>Nombre</mat-label>
-                    <input matInput  name="nombre" formControlName="validaNombre" [(ngModel)]="docente.nombre" >
+                    <input matInput  name="nombre" formControlName="validaNombre" [(ngModel)]="docente.nombre" maxlength="30">
                     <!--inicio de validacion nombre -->
                     <mat-hint style="color:red" *ngIf="formsRegistra.controls.validaNombre.touched">
                         <span *ngIf="formsRegistra.controls.validaNombre.hasError('required')">
@@ -23,7 +23,7 @@
                 
                 <mat-form-field class="col-md-4">
                     <mat-label>DNI</mat-label>
-                    <input  matInput name="dni" formControlName="validaDni" [(ngModel)]="docente.dni">
+                    <input  matInput name="dni" formControlName="validaDni" [(ngModel)]="docente.dni" >
                     <!--inicio de validacion dni -->
                     <mat-hint style="color:red" *ngIf="formsRegistra.controls.validaDni.touched">
                         <span *ngIf="formsRegistra.controls.validaDni.hasError('required')">

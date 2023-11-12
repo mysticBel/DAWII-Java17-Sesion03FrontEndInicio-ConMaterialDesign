@@ -34,11 +34,22 @@ export class CrudDocenteUpdateComponent {
   provincias: string[] = [];;
   distritos: Ubigeo[] = [];;
 
+
+    // Para la validacion
+    formsActualiza = this.formBuilder.group({
+      validaNombre: ['', [Validators.required, Validators.pattern('[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,30}')]],
+      validaDni: ['', [Validators.required,Validators.pattern('[0-9]{8}')]],
+      validaDepartamento: ['', [Validators.min(1)]],
+      validaProvincia: ['', [Validators.min(1)]],
+      validaDistrito: ['', [Validators.min(1)]],
+      validaEstado: ['', [Validators.min(0)]],
+    });
+
   constructor(public dialogRef: MatDialogRef<CrudDocenteUpdateComponent>,
-    private formBuilder: FormBuilder,
-    private docenteService:DocenteService, 
-    private ubigeoService:UbigeoService,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              private formBuilder: FormBuilder,
+              private docenteService:DocenteService, 
+              private ubigeoService:UbigeoService,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
 
         this.docente = data;            
         this.ubigeoService.listarDepartamento().subscribe(
